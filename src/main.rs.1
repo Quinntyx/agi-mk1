@@ -1,0 +1,154 @@
+#![feature(iter_intersperse)]
+use std::io;
+use std::io::stdin;
+
+use kalosm::{*, language::*};
+use kalosm::language::Mistral;
+
+use agi_mk1::model::{Message, MemoryConstruct, Memory};
+use agi_mk1::util::*;
+
+use std::collections::HashSet;
+use std::fs;
+
+use ron::{ser,de};
+
+#[tokio::main]
+async fn main() -> io::Result<()> {
+    let common_words = {
+        let mut foo = HashSet::<&str>::new();
+        foo.extend(
+            vec!(
+                "a",
+                "and",
+                "the",
+                "an",
+                "so",
+                "that",
+                "these",
+                "those"
+            ).iter()
+        );
+        foo
+    };
+
+    // let mut database = MemoryConstruct::new();
+
+    let mut database = fs::read_to_string("memory.ron")
+        .map(|m| de::from_str(&m).unwrap())
+        .unwrap_or(MemoryConstruct::new());
+
+    print("Initializing Mistral...");
+    let mut llm = Mistral::start().await;
+    // let mut llm = 
+    println!(" done!");
+
+    let base_prompt = String::from(
+        "The following is a conversation between an artificial intelligence named Fiona and the User. There is only one user. Context \
+        for each individual completion will be provided alongside the messages, with Context: preceding any inserted messages which serve \
+        to provide context to assure accurate generation; context messages cannot be read by the user. "
+    );
+
+    let mut messages: Vec<Message> = Vec::new();
+
+    let mut current = 0;
+
+    loop {
+        let mut message = Message {
+            content: String::new(),
+            source: "User".to_string(),
+        };
+        
+        print(&format!("{current}> "));
+
+        stdin().read_line(&mut message.content)?;
+        messages.push(message.clone());
+
+        println("== response generating ==");
+
+        println("- acquiring context");
+        let ctx = &message.content.split(" ")
+            .filter(|w| !common_words.contains(w))
+            .map(|w| database.search(String::from(w)).into_iter())
+            .flatten()
+            .map(|m| m.clone())
+            .collect::<Vec<Memory>>();
+
+        println("- inserting most recent message to memory");
+        // database.push(message as a memory lol)
+        database.push_message(message.clone(), current);
+        if current > 0 { database.link(current, current - 1, 1.0) }
+
+        println("- linking context");
+        ctx.iter()
+            .for_each(|m| database.link(current, m.id, 0.5));
+
+        println("- processing context");
+
+        let ctx_processed = ctx.iter()
+            .map(|m: &Memory| {
+                format!("According to {}, {}",
+                    m.source,
+                    m.content,
+                )
+            })
+            .intersperse("\n".to_owned())
+            .collect::<String>();
+
+        println!(
+            "context linked: {}",
+            ctx.iter()
+                .map(|m| m.id.to_string())
+                .intersperse(String::from(", "))
+                .collect::<String>()
+        );
+
+        println("== context ==");
+        println(&ctx_processed);
+        println("== end context ==");
+
+        current += 1;
+
+        let prompt = format!(
+            "{}\n{}\nContext: {}\nFiona: ", 
+            base_prompt, 
+            messages.iter()
+                .map(|m: &Message| m.build())
+                .collect::<Vec<String>>()
+                .join("\n"),
+            ctx_processed,
+        );
+
+        let stream = llm.stream_text(&prompt)
+            .with_stop_on(Some(String::from("User: ")))
+            .await
+            .unwrap();
+        
+        println("- Stream Acquired...");
+
+        let mut response = String::new();
+
+        let mut sentences = stream.words();
+        while let Some(text) = sentences.next().await {
+            print(&text);
+            response.push_str(&text)
+        }
+
+        messages.push(
+            Message {
+                content: response,
+                source: "Fiona".to_string(),
+            }
+        );
+
+        println!("");
+
+        println("- response complete");
+        println("- writing response to memory");
+        
+
+        println("== response complete ==");
+        
+        println(&messages.last().unwrap().content);
+    }
+}

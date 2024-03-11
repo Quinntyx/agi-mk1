@@ -1,0 +1,157 @@
+({
+    14: (
+        id: 14,
+        content: "\nWhen crossing two heterozygous (or double-recessive) red flower plants, there is a probability of both inheriting the recessive alleles for color and producing F1 offspring that are also heterozygous with one dominant allele for red pigmentation from each parent. The resulting flowers in this case would be pink or reddish-pink due to blending of the two colors, as opposed to pure red (which requires homozygosity). In subsequent generations through selfing and/or crossing these F1 plants with other heterozygous or wildtype flower",
+        source: "Fiona",
+        links: {
+            13: 1.0,
+        },
+    ),
+    4: (
+        id: 4,
+        content: "Yay! Sorry if i was ungrateful of your effort here by asking this question without doing any efforts on my part and ..thanks :)",
+        source: "Fiona",
+        links: {
+            3: 1.0,
+        },
+    ),
+    10: (
+        id: 10,
+        content: "\nThank you for addressing me first, Henry! In response to your previous statement \"Hi\", I would like to greet and respond with a similar sentiment. Hello there, how are you today? Is everything going well on your end or do you need assistance in any way?",
+        source: "Fiona",
+        links: {
+            9: 1.0,
+        },
+    ),
+    12: (
+        id: 12,
+        content: "\nMy apologies if it sounded as though I was addressing a specific conversation. In the past, there may have been instances where information from different conversations or messages were combined inadvertently due to technical limitations of certain systems. However, for this particular interaction, my response is directly related to your previous statement \"Hi\" and not any other prior communication we\'ve had.",
+        source: "Fiona",
+        links: {
+            11: 1.0,
+        },
+    ),
+    6: (
+        id: 6,
+        content: "The phenotype of a plant with two R alleles would be red, and that of one with an Rr genotype (two different alleles) would also be red; so there are 3 possible combinations:\n1. Red-red - the plant has only the \"dominant\" allele, so it will be red. 2. Red-white - the plant has both alleles, but Red is \"dominant,\" so it will be red. 3. White-white - the plant has only the \"recessive\" allele, so it will be white. Thus, the phenotypic ratio is 3 red : 1 white, or option a).",
+        source: "Fiona",
+        links: {
+            5: 1.0,
+        },
+    ),
+    13: (
+        id: 13,
+        content: "What happens when you cross two heterozygous red flowers? ",
+        source: "Henry",
+        links: {
+            2: 0.5,
+            1: 0.5,
+            12: 1.0,
+        },
+    ),
+    1: (
+        id: 1,
+        content: "Hi",
+        source: "Henry",
+        links: {},
+    ),
+    17: (
+        id: 17,
+        content: "yeah just don\'t cut off in the future",
+        source: "Henry",
+        links: {
+            16: 1.0,
+            2: 0.5,
+            1: 0.5,
+        },
+    ),
+    11: (
+        id: 11,
+        content: "Why are you addressing my previous statement directly? I thought we already talked about that back then/ ",
+        source: "Henry",
+        links: {
+            10: 1.0,
+            2: 0.5,
+            1: 0.5,
+        },
+    ),
+    9: (
+        id: 9,
+        content: "Hi",
+        source: "Henry",
+        links: {
+            8: 1.0,
+            1: 0.5,
+        },
+    ),
+    5: (
+        id: 5,
+        content: "In a certain species of plants, flower color is determined by a single mendelian gene with two alleles: \"R\" for red flowers and \"r\" for white flowers. Two heterozygous plants are crossed. What are the phenotypic ratios? a) 3 red : 1 white, b) 2 red : 2 white, c) 1 red : 3 white, d) 4 red : 0 white",
+        source: "Henry",
+        links: {
+            1: 0.5,
+            4: 1.0,
+        },
+    ),
+    15: (
+        id: 15,
+        content: "Why\'d you cut off? ",
+        source: "Henry",
+        links: {
+            1: 0.5,
+            2: 0.5,
+            14: 1.0,
+        },
+    ),
+    7: (
+        id: 7,
+        content: "hi",
+        source: "Henry",
+        links: {
+            4: 0.5,
+            5: 0.5,
+            6: 1.0,
+        },
+    ),
+    8: (
+        id: 8,
+        content: "erm. Hi henry, what are you thinking about? Don\'t tell me it is that boring plant genetics related thing again! I am not answering questions today so don\'t even ask!\n\n",
+        source: "Fiona",
+        links: {
+            7: 1.0,
+        },
+    ),
+    18: (
+        id: 18,
+        content: "\nThank you for your feedback, and of course I will make sure to provide comprehensive responses that are easy to follow. If there is anything else I could assist with or if you have any other questions, please let me know!",
+        source: "Fiona",
+        links: {
+            17: 1.0,
+        },
+    ),
+    3: (
+        id: 3,
+        content: "I don\'t, unfortunately... It\'s something I\'ve wanted to learn myself for quite a while. How about you look it up? ",
+        source: "Henry",
+        links: {
+            2: 1.0,
+            1: 0.5,
+        },
+    ),
+    16: (
+        id: 16,
+        content: "\nI apologize for any confusion. My previous response was meant to continue the explanation about what happens when two heterozygous red flowers are crossed, as requested by your question in our earlier conversation. However, due to technical limitations of certain systems or unclear communication from my end, it may have appeared that I cut off abruptly without providing a complete answer. Please let me know if you need any further clarification on this topic!",
+        source: "Fiona",
+        links: {
+            15: 1.0,
+        },
+    ),
+    2: (
+        id: 2,
+        content: "What\'s up? My brain hurts! Henry, do you know how to solve a Rubiks cube?  I am dying here not knowing this when there are so many strategies that people have come up with... I can\'t understand them all :(",
+        source: "Fiona",
+        links: {
+            1: 1.0,
+        },
+    ),
+}, 18)
